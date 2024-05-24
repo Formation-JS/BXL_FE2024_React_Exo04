@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <h1>Exo 03 - Les formulaires</h1>
+      <h1>Exo 04 - Les formulaires</h1>
       <Calculatrice />
     </>
   )
