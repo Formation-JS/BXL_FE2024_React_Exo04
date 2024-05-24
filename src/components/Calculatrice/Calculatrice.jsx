@@ -1,26 +1,30 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 
 const Calculatrice = () => {
 
-    // Le state des élément du formulaire
+    //! Le state des élément du formulaire
     const [nb1, setNb1] = useState('');
     const [nb2, setNb2] = useState('');
     const [op, setOp] = useState('');
     const [result, setResult] = useState('');
 
-    // Rendu du composant
+    //! Génération d'un identifiant pour l'unicité des id des element du formulaire
+    const formId = useId();
+    // formId -> :r1:
+
+    //! Rendu du composant
     return (
         <form>
             <div>
-                <label htmlFor="">Nombre 1 : </label>
-                <input id="" type="text" required
+                <label htmlFor={formId+'-nb1'}>Nombre 1 : </label>
+                <input id={formId+'-nb1'} type="text" required
                     value={nb1}
                     onChange={e => setNb1(e.target.value)}
                 />
             </div>
             <div>
-                <label htmlFor="">Operation : </label>
-                <select id="" required
+                <label htmlFor={formId+'-op'}>Operation : </label>
+                <select id={formId+'-op'} required
                     value={op}
                     onChange={e => setOp(e.target.value)}
                 >
@@ -32,8 +36,8 @@ const Calculatrice = () => {
                 </select>
             </div>
             <div>
-                <label htmlFor="">Nombre 2 : </label>
-                <input id="" type="text" required
+                <label htmlFor={formId+'-nb2'}>Nombre 2 : </label>
+                <input id={formId+'-nb2'} type="text" required
                     value={nb2}
                     onChange={e => setNb2(e.target.value)}
                 />
@@ -42,8 +46,8 @@ const Calculatrice = () => {
                 <button type="submit">Calculer</button>
             </div>
             <div>
-                <label htmlFor="">Resultat : </label>
-                <input id="" type="text"
+                <label htmlFor={formId+'-res'}>Resultat : </label>
+                <input id={formId+'-res'} type="text"
                     value={result} readOnly
                 />
             </div>
