@@ -12,19 +12,56 @@ const Calculatrice = () => {
     const formId = useId();
     // formId -> :r1:
 
+    //! Fonction pour réagir au submit du formulaire
+    const handleCalcSubmit = (e) => {
+        //? Déactivation du comportement de base
+        e.preventDefault();
+
+        //? Traitement
+        let temp;
+        const val1 = parseFloat(nb1);
+        const val2 = parseFloat(nb2);
+
+        switch (op) {
+            case 'plus':
+                temp = val1 + val2;
+                break;
+            case 'minus':
+                temp = val1 - val2
+                break;
+            case 'mult':
+                temp = val1 * val2
+                break;
+            case 'div':
+                if(val2 === 0) {
+                    temp = 'Error : Division par zéro';
+                }
+                else {
+                    temp = val1 - val2
+                }
+                break;
+            default: 
+                temp = 'Error : Opération non supporté';
+                break;
+        }
+
+        //? Modification du state
+        setResult(temp);
+    };
+
     //! Rendu du composant
     return (
-        <form>
+        <form onSubmit={handleCalcSubmit}>
             <div>
-                <label htmlFor={formId+'-nb1'}>Nombre 1 : </label>
-                <input id={formId+'-nb1'} type="text" required
+                <label htmlFor={formId + '-nb1'}>Nombre 1 : </label>
+                <input id={formId + '-nb1'} type="text" required
                     value={nb1}
                     onChange={e => setNb1(e.target.value)}
                 />
             </div>
             <div>
-                <label htmlFor={formId+'-op'}>Operation : </label>
-                <select id={formId+'-op'} required
+                <label htmlFor={formId + '-op'}>Operation : </label>
+                <select id={formId + '-op'} required
                     value={op}
                     onChange={e => setOp(e.target.value)}
                 >
@@ -36,8 +73,8 @@ const Calculatrice = () => {
                 </select>
             </div>
             <div>
-                <label htmlFor={formId+'-nb2'}>Nombre 2 : </label>
-                <input id={formId+'-nb2'} type="text" required
+                <label htmlFor={formId + '-nb2'}>Nombre 2 : </label>
+                <input id={formId + '-nb2'} type="text" required
                     value={nb2}
                     onChange={e => setNb2(e.target.value)}
                 />
@@ -46,8 +83,8 @@ const Calculatrice = () => {
                 <button type="submit">Calculer</button>
             </div>
             <div>
-                <label htmlFor={formId+'-res'}>Resultat : </label>
-                <input id={formId+'-res'} type="text"
+                <label htmlFor={formId + '-res'}>Resultat : </label>
+                <input id={formId + '-res'} type="text"
                     value={result} readOnly
                 />
             </div>
