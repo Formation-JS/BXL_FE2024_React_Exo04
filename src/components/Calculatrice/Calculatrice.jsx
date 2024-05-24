@@ -27,26 +27,39 @@ const Calculatrice = () => {
                 temp = val1 + val2;
                 break;
             case 'minus':
-                temp = val1 - val2
+                temp = val1 - val2;
                 break;
             case 'mult':
-                temp = val1 * val2
+                temp = val1 * val2;
                 break;
             case 'div':
-                if(val2 === 0) {
+                if (val2 === 0) {
                     temp = 'Error : Division par zéro';
                 }
                 else {
-                    temp = val1 - val2
+                    temp = val1 - val2;
                 }
                 break;
-            default: 
+            default:
                 temp = 'Error : Opération non supporté';
                 break;
         }
 
         //? Modification du state
         setResult(temp);
+    };
+
+    const handleInputNumber = (e, setInputValue) => {
+
+        const inputValue = e.target.value;
+
+        // Si la valeur n'est pas un nombre, le state n'est pas modifier
+        if (isNaN(inputValue)) {
+            return;
+        }
+
+        // Modification du state
+        setInputValue(e.target.value);
     };
 
     //! Rendu du composant
@@ -56,7 +69,7 @@ const Calculatrice = () => {
                 <label htmlFor={formId + '-nb1'}>Nombre 1 : </label>
                 <input id={formId + '-nb1'} type="text" required
                     value={nb1}
-                    onChange={e => setNb1(e.target.value)}
+                    onChange={e => handleInputNumber(e, setNb1)}
                 />
             </div>
             <div>
@@ -76,7 +89,7 @@ const Calculatrice = () => {
                 <label htmlFor={formId + '-nb2'}>Nombre 2 : </label>
                 <input id={formId + '-nb2'} type="text" required
                     value={nb2}
-                    onChange={e => setNb2(e.target.value)}
+                    onChange={e => handleInputNumber(e, setNb2)}
                 />
             </div>
             <div>
@@ -84,9 +97,7 @@ const Calculatrice = () => {
             </div>
             <div>
                 <label htmlFor={formId + '-res'}>Resultat : </label>
-                <input id={formId + '-res'} type="text"
-                    value={result} readOnly
-                />
+                <input id={formId + '-res'} type="text" value={result} readOnly />
             </div>
         </form>
     );
